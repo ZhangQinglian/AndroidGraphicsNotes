@@ -1,6 +1,15 @@
 # AndroidGraphicsNotes
 
+# Reference
 
+- [https://github.com/google/grafika](https://github.com/google/grafika)
+
+## Camera
+- [https://developer.android.com/guide/topics/media/camera](https://developer.android.com/guide/topics/media/camera)
+- [https://github.com/googlearchive/android-Camera2Basic](https://github.com/googlearchive/android-Camera2Basic)
+
+## Dependencies
+- [https://github.com/Karumi/Dexter]https://github.com/Karumi/Dexter 
 
 ```
 Copyright [2021] [Zhang Qinglian]
