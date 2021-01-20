@@ -19,6 +19,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.zql.mobile.graphics.camera.Camera2BasicActivity
+import com.zql.mobile.graphics.opengl.GLSurfaceViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -27,11 +28,14 @@ class MainActivity : AppCompatActivity(), SectionCallback {
     companion object {
         const val SECTION_NORMAL_GROUP = 0
         const val SECTION_CAMERA = 1
+        const val SECTION_BASIC_GL_SURFACE_VIEW = 2
     }
 
     private val sections = arrayOf(
         SectionItem.SectionGroup("Camera", SECTION_NORMAL_GROUP),
-        SectionItem.SectionTitle("Camera2 Basic", SECTION_CAMERA)
+        SectionItem.SectionTitle("Camera2 Basic", SECTION_CAMERA),
+        SectionItem.SectionGroup("OpenGL", SECTION_NORMAL_GROUP),
+        SectionItem.SectionTitle("GLSurfaceView Basic", SECTION_BASIC_GL_SURFACE_VIEW)
     )
     private val sectionAdapter = HomeSectionAdapter(sections, this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +69,14 @@ class MainActivity : AppCompatActivity(), SectionCallback {
                         }
 
                     }).check()
+            }
+            SECTION_BASIC_GL_SURFACE_VIEW -> {
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        GLSurfaceViewActivity::class.java
+                    )
+                )
             }
         }
     }

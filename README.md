@@ -2,13 +2,18 @@
 
 # Reference
 
-- [https://github.com/google/grafika](https://github.com/google/grafika)
-
 ## Camera
 - [https://developer.android.com/guide/topics/media/camera](https://developer.android.com/guide/topics/media/camera)
 - [https://github.com/googlearchive/android-Camera2Basic](https://github.com/googlearchive/android-Camera2Basic)
 
-## Dependencies
+## OpenGL
+- [https://developer.android.com/guide/topics/graphics/opengl](https://developer.android.com/guide/topics/graphics/opengl)
+- [https://developer.android.com/reference/android/opengl/GLSurfaceView](https://developer.android.com/reference/android/opengl/GLSurfaceView)
+- [https://learnopengl-cn.github.io/](https://learnopengl-cn.github.io/)
+- [http://docs.gl/](http://docs.gl/)
+
+## Open Source Project
+- [https://github.com/google/grafika](https://github.com/google/grafika)
 - [https://github.com/Karumi/Dexter]https://github.com/Karumi/Dexter 
 
 ```
