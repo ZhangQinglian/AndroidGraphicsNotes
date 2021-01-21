@@ -2,7 +2,6 @@ package com.zql.mobile.graphics
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,8 +19,8 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.zql.mobile.graphics.camera.Camera2BasicActivity
 import com.zql.mobile.graphics.opengl.GLSurfaceViewActivity
+import com.zql.mobile.graphics.opengl.OpenGLES_EGLActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), SectionCallback {
 
@@ -29,13 +28,15 @@ class MainActivity : AppCompatActivity(), SectionCallback {
         const val SECTION_NORMAL_GROUP = 0
         const val SECTION_CAMERA = 1
         const val SECTION_BASIC_GL_SURFACE_VIEW = 2
+        const val SECTION_OPEN_GL_ES_EGL = 3
     }
 
     private val sections = arrayOf(
         SectionItem.SectionGroup("Camera", SECTION_NORMAL_GROUP),
         SectionItem.SectionTitle("Camera2 Basic", SECTION_CAMERA),
         SectionItem.SectionGroup("OpenGL", SECTION_NORMAL_GROUP),
-        SectionItem.SectionTitle("GLSurfaceView Basic", SECTION_BASIC_GL_SURFACE_VIEW)
+        SectionItem.SectionTitle("GLSurfaceView Basic", SECTION_BASIC_GL_SURFACE_VIEW),
+        SectionItem.SectionTitle("OpenGL ES and EGL", SECTION_OPEN_GL_ES_EGL)
     )
     private val sectionAdapter = HomeSectionAdapter(sections, this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +76,14 @@ class MainActivity : AppCompatActivity(), SectionCallback {
                     Intent(
                         this@MainActivity,
                         GLSurfaceViewActivity::class.java
+                    )
+                )
+            }
+            SECTION_OPEN_GL_ES_EGL -> {
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        OpenGLES_EGLActivity::class.java
                     )
                 )
             }
