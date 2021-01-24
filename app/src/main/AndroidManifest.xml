@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".opengl.OpenGLES_EGLActivity"></activity>
         <activity android:name=".opengl.GLSurfaceViewActivity" />
+        <activity android:name=".opengl.OpenGLES_VertexAttributePointer_Activity" />
         <activity android:name=".camera.Camera2BasicActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

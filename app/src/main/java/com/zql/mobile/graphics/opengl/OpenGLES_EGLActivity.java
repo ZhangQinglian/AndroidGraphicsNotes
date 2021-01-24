@@ -9,7 +9,6 @@ import android.opengl.EGLDisplay;
 import android.opengl.EGLSurface;
 import android.opengl.GLES32;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -21,7 +20,6 @@ public class OpenGLES_EGLActivity extends AppCompatActivity implements SurfaceHo
     private EGLContext mEGLContext;
     private EGLSurface mEGLSurface;
     private EGLConfig mEGLConfig;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
