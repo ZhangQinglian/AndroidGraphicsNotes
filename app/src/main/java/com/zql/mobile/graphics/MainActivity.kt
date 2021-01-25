@@ -19,8 +19,8 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.zql.mobile.graphics.camera.Camera2BasicActivity
 import com.zql.mobile.graphics.opengl.GLSurfaceViewActivity
-import com.zql.mobile.graphics.opengl.OpenGLDrawTriangleActivity
 import com.zql.mobile.graphics.opengl.OpenGLES_EGLActivity
+import com.zql.mobile.graphics.opengl.OpenGLES_VertexAttributePointer_Activity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), SectionCallback {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), SectionCallback {
         const val SECTION_CAMERA = 1
         const val SECTION_BASIC_GL_SURFACE_VIEW = 2
         const val SECTION_OPEN_GL_ES_EGL = 3
-        const val SECTION_OPEN_GL_DRAW_TRIANGLE =4
+        const val SECTION_OPEN_GL_VERTEX_ATTRIBUTE_POINTER = 4
     }
 
     private val sections = arrayOf(
@@ -39,7 +39,9 @@ class MainActivity : AppCompatActivity(), SectionCallback {
         SectionItem.SectionGroup("OpenGL", SECTION_NORMAL_GROUP),
         SectionItem.SectionTitle("GLSurfaceView Basic", SECTION_BASIC_GL_SURFACE_VIEW),
         SectionItem.SectionTitle("OpenGL ES and EGL", SECTION_OPEN_GL_ES_EGL),
-        SectionItem.SectionTitle("Draw Triangle", SECTION_OPEN_GL_DRAW_TRIANGLE)
+        SectionItem.SectionTitle ("OpenGL ES VertextAttributePointer",
+        SECTION_OPEN_GL_VERTEX_ATTRIBUTE_POINTER
+    )
     )
     private val sectionAdapter = HomeSectionAdapter(sections, this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,11 +92,11 @@ class MainActivity : AppCompatActivity(), SectionCallback {
                     )
                 )
             }
-            SECTION_OPEN_GL_DRAW_TRIANGLE -> {
+            SECTION_OPEN_GL_VERTEX_ATTRIBUTE_POINTER -> {
                 startActivity(
                     Intent(
                         this@MainActivity,
-                        OpenGLDrawTriangleActivity::class.java
+                        OpenGLES_VertexAttributePointer_Activity::class.java
                     )
                 )
             }

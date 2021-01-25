@@ -20,7 +20,6 @@ public class OpenGLES_EGLActivity extends AppCompatActivity implements SurfaceHo
     private EGLContext mEGLContext;
     private EGLSurface mEGLSurface;
     private EGLConfig mEGLConfig;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
