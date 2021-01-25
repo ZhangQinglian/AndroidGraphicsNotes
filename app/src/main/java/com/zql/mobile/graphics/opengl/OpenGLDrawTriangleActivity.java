@@ -14,7 +14,11 @@ import android.view.SurfaceView;
 
 import com.zql.mobile.graphics.R;
 
-public class OpenGLES_EGLActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+
+public class OpenGLDrawTriangleActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     private EGLDisplay mEGLDisplay;
     private EGLContext mEGLContext;
@@ -24,7 +28,7 @@ public class OpenGLES_EGLActivity extends AppCompatActivity implements SurfaceHo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_open_g_l_e_s__e_g_l);
+        setContentView(R.layout.activity_open_g_l_draw_triangle);
         SurfaceView sv = findViewById(R.id.surface_view);
         sv.getHolder().addCallback(this);
     }
@@ -83,11 +87,65 @@ public class OpenGLES_EGLActivity extends AppCompatActivity implements SurfaceHo
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         GLES32.glViewport(0, 0, width, height);
         GLES32.glClear(GLES32.GL_COLOR_BUFFER_BIT);
+        draw();
         EGL14.eglSwapBuffers(mEGLDisplay, mEGLSurface);
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
 
+    }
+
+    String vertexShader =
+            "attribute vec4 aPosition;\n" +
+                    "void main(){\n" +
+                    "    gl_Position = aPosition;\n" +
+                    "}";
+
+    String fragmentShader =
+            "void main(){\n" +
+                    "    gl_FragColor = vec4(0,0,1,1);\n" +
+                    "}";
+
+    private FloatBuffer vertexBuffer = createFloatBuffer(new float[]{
+                    0.5f, 0.5f,      // top
+                    -0.5f, 0.5f,    // bottom left
+                    0f, -0.5f,     // bottom right
+            }
+    );
+    private FloatBuffer createFloatBuffer(float[] coords) {
+        ByteBuffer bb = ByteBuffer.allocateDirect(coords.length * 4);
+        bb.order(ByteOrder.nativeOrder());
+        FloatBuffer fb = bb.asFloatBuffer();
+        fb.put(coords);
+        fb.position(0);
+        return fb;
+    }
+
+    private void draw() {
+        int program = createProgram(vertexShader, fragmentShader);
+        GLES32.glUseProgram(program);
+        int aPostionLocation = GLES32.glGetAttribLocation(program, "aPosition");
+        GLES32.glEnableVertexAttribArray(aPostionLocation);
+        GLES32.glVertexAttribPointer(aPostionLocation, 2, GLES32.GL_FLOAT, false, 2*4, vertexBuffer);
+        GLES32.glDrawArrays(GLES32.GL_TRIANGLE_STRIP, 0, 3);
+
+    }
+
+    private int createProgram(String vertexSource, String fragmentSource) {
+        int vertexShader = loadShader(GLES32.GL_VERTEX_SHADER, vertexSource);
+        int fragmentShader = loadShader(GLES32.GL_FRAGMENT_SHADER, fragmentSource);
+        int program = GLES32.glCreateProgram();
+        GLES32.glAttachShader(program, vertexShader);
+        GLES32.glAttachShader(program, fragmentShader);
+        GLES32.glLinkProgram(program);
+        return program;
+    }
+
+    private int loadShader(int shaderType, String source) {
+        int shader = GLES32.glCreateShader(shaderType);
+        GLES32.glShaderSource(shader, source);
+        GLES32.glCompileShader(shader);
+        return shader;
     }
 }
